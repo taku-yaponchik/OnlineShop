@@ -14,10 +14,18 @@
 				<li class="span3">
 					<div class="product-box">
 						<!--						<span class="sale_tag">{{product.status}}</span>-->
-						<a href="{{product.get_absolute_url}}"><img alt="" src="{{ product.image.url }}"></a><br/>
-						<a href="{{product.get_absolute_url}}" class="title">{{ product.name }}</a><br/>
-						<a href="#" class="category">{{ product.category }}</a>
-						<p class="price">${{ product.price }}</p>
+						<a href="{{product.get_absolute_url}}">
+							<img alt="" src="{{ product.image.url }}" width="500" height="500">
+						</a><br/>
+						<a href="{{product.get_absolute_url}}" class="title">
+							{{ product.name }}
+						</a><br/>
+						<a href="#" class="category">
+							{{ product.category }}
+						</a>
+						<p class="price">
+							${{ product.price }}
+						</p>
 					</div>
 				</li>
 				{% endfor %}
@@ -25,61 +33,37 @@
 			<hr>
 
 
-{% if is_paginated%}
-<div class="row">
-	<div class="col">
-		<div class="block-27">
-			<ul>
-				<li class="page{% if not prev_url%} disabled {%endif%}">
-					<a href="{{ prev_url }}">&lt;</a>
-				</li>
-			{% for n in products.paginator.page_range %}
-			{% if products.number == n %}
-				<li class="active">
-					<a href="?page={{n}}" > {{n}} </a>
-				</li>
-			{% elif n > products.number|add:-3 and n < products.number|add:3 %}
-				<li>
-					<a href="?page={{n}}" > {{n}} </a>
-				</li>
-			{% endif %}
+			{% if is_paginated%}
+			<div class="row">
+				<div class="col">
+					<div class="pagination pagination-small pagination-centered">
+						<ul>
+							<li class="page{% if not prev_url%} disabled {%endif%}">
+								<a href="{{ prev_url }}">&lt;</a>
+							</li>
+							{% for n in products.paginator.page_range %}
+							{% if products.number == n %}
+							<li class="active">
+								<a href="?page={{n}}" > {{n}} </a>
+							</li>
+							{% elif n > products.number|add:-3 and n < products.number|add:3 %}
+							<li>
+								<a href="?page={{n}}" > {{n}} </a>
+							</li>
+							{% endif %}
 
-			{% endfor %}
-				<li class="{% if not next %} disabled {%endif%}">
-					<a href="{{ next }}">&gt;</a>
-				</li>
-			</ul>
+							{% endfor %}
+							<li class="{% if not next %} disabled {%endif%}">
+								<a href="{{ next }}">&gt;</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			{%endif%}
+
 		</div>
-	</div>
-</div>
-{%endif%}
-<!--			{% if is_pagination %}-->
-<!--			<div class="pagination pagination-small pagination-centered">-->
-<!--				<ul>-->
-<!--					<li class="page{% if not prev_url%} disabled {%endif%}">-->
-<!--						<a href="{{ prev_url }}">Prev</a>-->
-<!--					</li>-->
-<!--					{% for num in product_data.paginator.page_range %}-->
-<!--					{% if product_data.number == num %}-->
-<!--					<li class="active">-->
-<!--						<a href="?page={{num}}">{{num}}-->
-<!--						</a>-->
-<!--					</li>-->
-<!--					{% elif num > product_data.number|add:-3 and num < product_data.number|add:3 %}-->
-<!--					<li>-->
-<!--						<a href="?page={{num}}" > {{num}} </a>-->
-<!--					</li>-->
-<!--					{% endif %}-->
-
-<!--					{% endfor %}-->
-
-<!--					<li class="page{% if not next %} disabled {% endif %}">-->
-<!--						<a href="{{next}}">Next</a></li>-->
-<!--				</ul>-->
-<!--			</div>-->
-<!--			{% endif %}-->
-		</div>
-		{% include 'includs/category_card.html' %}
+		{% include 'includes/category_card.html' %}
 	</div>
 </section>
 

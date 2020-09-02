@@ -1,14 +1,19 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 from django.core.paginator import Paginator
+import random
 
 # Create your views here.
+# def latest_prod():
+#     lat_pag = Paginator(latest_products, 1)
+#
+
 def product_list(request, category_slug=None): #category_slug нужен для создания url категории
     # If categories don't exist, it must be None
     category = None
     categories = Category.objects.all()
-    # products = Product.objects.filter(status=True)
     products = Product.objects.all()
+    latest_products = Product.objects.order_by('name')[:3]
 
     if category_slug: #если наш slug не пустой и пользователь выбрал какую то категорию
         category = get_object_or_404(Category, slug=category_slug) #берём каьегорию по слагу
@@ -28,12 +33,11 @@ def product_list(request, category_slug=None): #category_slug нужен для 
     else:
         next = ''
 
-
     context = {
         'category': category,
         'categories': categories,
         'products': page,
-
+        'latest_products': latest_products,
         'is_paginated': is_paginated,
         'next': next,
         'prev_url': prev_url,
@@ -43,4 +47,18 @@ def product_list(request, category_slug=None): #category_slug нужен для 
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, slug=slug, id=id, status=True)
-    return render(request, 'product_detail.html', context={'product': product})
+    latest_products = Product.objects.order_by('name')[:3]
+    categories = Category.objects.all()
+
+
+    category_products=Product.objects.filter(category=product.category)
+    random_products = random.choices(category_products, k=2)
+    context = {
+        'product': product,
+        'random_products': random_products,
+        'latest_products': latest_products,
+        'categories': categories,
+
+
+    }
+    return render(request, 'product_detail.html', context)
