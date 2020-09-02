@@ -66,17 +66,17 @@
 						<div class="carousel-inner">
 							<div class="active item">
 								<ul class="thumbnails listing-products">
+									{% for random_product in random_products %}
 									<li class="span3">
 										<div class="product-box">
-											{% for random_product in random_products %}
+
 											<a href="product_detail.html"><img alt="" src="{{random_product.image.url}}"></a><br/>
 											<a href="product_detail.html" class="title">{{random_product.name}}</a><br/>
 											<a href="#" class="category">Product code: {{random_product.id}}</a>
 											<p class="price">${{random_product.price}}</p>
-											{% endfor %}
 										</div>
 									</li>
-
+											{% endfor %}
 								</ul>
 							</div>
 
