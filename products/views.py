@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 from django.core.paginator import Paginator
+
 import random
 
 # Create your views here.
 # def latest_prod():
 #     lat_pag = Paginator(latest_products, 1)
 #
+from cart.forms import CartAddProductForm
+
 
 def product_list(request, category_slug=None): #category_slug нужен для создания url категории
     # If categories don't exist, it must be None
@@ -52,12 +55,14 @@ def product_detail(request, id, slug):
 
 
     category_products=Product.objects.filter(category=product.category)
-    random_products = random.choices(category_products, k=2)
+    random_products = random.choices(category_products, k=3)
+    cart_product_form = CartAddProductForm()
     context = {
         'product': product,
         'random_products': random_products,
         'latest_products': latest_products,
         'categories': categories,
+        'cart_product_form': cart_product_form
 
 
     }
