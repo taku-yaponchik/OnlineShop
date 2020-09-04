@@ -43,8 +43,20 @@
 					<div class="account pull-right">
 						<ul class="user-menu">				
 							<li><a href="#">My Account</a></li>
-							<li><a href="{% static 'cart.html' %}">Your Cart</a></li>
-							<li><a href="{% static 'checkout.html' %}">Checkout</a></li>
+
+							<li>
+								{% with total_items=cart|length %}
+								{% if cart|length > 0 %}
+								Корзина:
+								<a href="cart.html">
+									{{total_items}}
+								</a>
+								{% else %}
+									Корзина: 0
+								{% endif %}
+								{% endwith %}
+							</li>
+							<li>Checkout</li>
 							<li><a href="{% static 'register.html' %}">Login</a></li>
 						</ul>
 					</div>
