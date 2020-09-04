@@ -5,95 +5,91 @@
 {% endblock %}
 
 {% block content %}
-
-<section class="main-content">
+<div class="span9">
 	<div class="row">
-		<div class="span9">
-			<div class="row">
-				<div class="span4">
-					<a href="{{product.image.url}}" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="{{product.image.url}}"></a>
-				</div>
-				<div class="span5">
-					<address>
-						<strong>Category:</strong> <span>{{product.category}}</span><br>
-						<strong>Product Code:</strong> <span>{{product.id}}</span><br>
-						<strong>Description:</strong> <span>{{product.description}}</span><br>
-						<strong>Availability:</strong> <span>
+		<div class="span4">
+			<a href="{{product.image.url}}" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="{{product.image.url}}"></a>
+		</div>
+		<div class="span5">
+			<address>
+				<strong>Category:</strong> <span>{{product.category}}</span><br>
+				<strong>Product Code:</strong> <span>{{product.id}}</span><br>
+				<strong>Description:</strong> <span>{{product.description}}</span><br>
+				<strong>Availability:</strong> <span>
 						{% if product.status %}
 							Есть в наличие
 						{% else %}
 							Нет в наличие
 						{% endif %}
 					</span><br>
-					</address>
-					<h4><strong>Price: ${{product.price}}</strong></h4>
-				</div>
-				<div class="span5">
-					<form class="form-inline" action="{% url 'cart_add' product.id %}" method="post">
-						{{cart_product_form.label}}
-						{{cart_product_form}}
-						{% csrf_token %}
-						<input class="btn btn-inverse" type="submit" value="Добавить в корзину">
-					</form>
-				</div>
+			</address>
+			<h4><strong>Price: ${{product.price}}</strong></h4>
+		</div>
+		<div class="span5">
+			<form class="form-inline" action="{% url 'cart_add' product.id %}" method="post">
+				{{cart_product_form.label}}
+				{{cart_product_form}}
+				{% csrf_token %}
+				<input class="btn btn-inverse" type="submit" value="Добавить в корзину">
+			</form>
+		</div>
 
-			</div>
-			<div class="row">
-				<div class="span9">
-					<ul class="nav nav-tabs" id="myTab">
-						<li class="active"><a href="#home">Description</a></li>
-						<li class=""><a href="#profile">Additional Information</a></li>
-					</ul>
-					<div class="tab-content">
-						<div class="tab-pane active" id="home">{{product.description}}</div>
-						<div class="tab-pane" id="profile">
-							<table class="table table-striped shop_attributes">
-								<tbody>
-								<tr class="">
-									<th>Size</th>
-									<td>Large, Medium, Small, X-Large</td>
-								</tr>
-								<tr class="alt">
-									<th>Colour</th>
-									<td>Orange, Yellow</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="span9">
-					<br>
-					<h4 class="title">
-						<span class="pull-left"><span class="text"><strong>Related</strong> Products</span></span>
-						<span class="pull-right">
-										<a class="left button" href="#myCarousel-1" data-slide="prev"></a><a class="right button" href="#myCarousel-1" data-slide="next"></a>
-									</span>
-					</h4>
-					<div id="myCarousel-1" class="carousel slide">
-						<div class="carousel-inner">
-							<div class="active item">
-								<ul class="thumbnails listing-products">
-									{% for random_product in random_products %}
-									<li class="span3">
-										<div class="product-box">
-
-											<a href="product_detail.html"><img alt="" src="{{random_product.image.url}}"></a><br/>
-											<a href="product_detail.html" class="title">{{random_product.name}}</a><br/>
-											<a href="#" class="category">Product code: {{random_product.id}}</a>
-											<p class="price">${{random_product.price}}</p>
-										</div>
-									</li>
-									{% endfor %}
-								</ul>
-							</div>
-
-						</div>
-					</div>
+	</div>
+	<div class="row">
+		<div class="span9">
+			<ul class="nav nav-tabs" id="myTab">
+				<li class="active"><a href="#home">Description</a></li>
+				<li class=""><a href="#profile">Additional Information</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="home">{{product.description}}</div>
+				<div class="tab-pane" id="profile">
+					<table class="table table-striped shop_attributes">
+						<tbody>
+						<tr class="">
+							<th>Size</th>
+							<td>Large, Medium, Small, X-Large</td>
+						</tr>
+						<tr class="alt">
+							<th>Colour</th>
+							<td>Orange, Yellow</td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-		{% include 'includes/category_card.html' %}
+		<div class="span9">
+			<br>
+			<h4 class="title">
+				<span class="pull-left"><span class="text"><strong>Related</strong> Products</span></span>
+				<span class="pull-right">
+										<a class="left button" href="#myCarousel-1" data-slide="prev"></a><a class="right button" href="#myCarousel-1" data-slide="next"></a>
+									</span>
+			</h4>
+			<div id="myCarousel-1" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="active item">
+						<ul class="thumbnails listing-products">
+							{% for random_product in random_products %}
+							<li class="span3">
+								<div class="product-box">
+
+									<a href="product_detail.html"><img alt="" src="{{random_product.image.url}}"></a><br/>
+									<a href="product_detail.html" class="title">{{random_product.name}}</a><br/>
+									<a href="#" class="category">Product code: {{random_product.id}}</a>
+									<p class="price">${{random_product.price}}</p>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
 	</div>
-</section>
+</div>
+{% include 'includes/category_card.html' %}
+
 {% endblock %}

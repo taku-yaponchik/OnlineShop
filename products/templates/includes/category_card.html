@@ -29,11 +29,12 @@
 				<a class="right button" href="{{ latest_post.next }}" data-slide="next"></a>
 			</span>
 		</h4>
-		{%for latest_product in latest_products %}
+
 		<div id="myCarousel" class="carousel slide">
 			<div class="carousel-inner">
 				<div class="active item">
 					<ul class="thumbnails listing-products">
+						{%for latest_product in latest_products %}
 						<li class="span3">
 							<div class="product-box">
 <!--								<span class="sale_tag"></span>-->
@@ -43,12 +44,13 @@
 								<p class="price">${{latest_product.price}}</p>
 							</div>
 						</li>
+								{% endfor %}
 					</ul>
 				</div>
 
 			</div>
 		</div>
-		{% endfor %}
+
 
 	</div>
 	<div class="block">
