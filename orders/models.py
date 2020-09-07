@@ -13,7 +13,7 @@ class Order(models.Model):
     address = models.CharField(max_length=250, null=True, verbose_name='* Адрес проживания')
     postal_code = models.CharField(max_length=20, verbose_name='Почтовой индекс')
 
-    phone = models.IntegerField(max_length=22, null=True, verbose_name='* Телефон',)
+    phone = models.IntegerField( null=True, verbose_name='* Телефон',)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
