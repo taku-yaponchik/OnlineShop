@@ -1,5 +1,5 @@
 from django.db import models
-from phone_field import PhoneField
+
 
 
 # модель заказа для сохранения данныъ заказа
