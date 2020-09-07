@@ -1,4 +1,5 @@
 from django.db import models
+from phone_field import PhoneField
 
 
 # модель заказа для сохранения данныъ заказа
@@ -6,12 +7,13 @@ from products.models import Product
 
 
 class Order(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
-    address = models.CharField(max_length=250)
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=50, null=True, verbose_name='* Имя')
+    last_name = models.CharField(max_length=50, null=True, verbose_name='* Фамилия')
+    email = models.EmailField(verbose_name='E-mail')
+    address = models.CharField(max_length=250, null=True, verbose_name='* Адрес проживания')
+    postal_code = models.CharField(max_length=20, verbose_name='Почтовой индекс')
+
+    phone = models.IntegerField(max_length=22, null=True, verbose_name='* Телефон',)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)

@@ -28,9 +28,12 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
+    latest_products = Product.objects.order_by('name')[:3]
+
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(
                 initial={'quantity': item['quantity'],
                          'update': True}
         )
-    return render(request, 'cart_detail.html', context={'cart': cart})
+    return render(request, 'cart_detail.html', context={'cart': cart, 'latest_products': latest_products,
+})

@@ -4,9 +4,13 @@ from django.shortcuts import render
 from cart.cart import Cart
 from .forms import OrderCreateForm
 from .models import OrderItem
+from products.models import Product
+
 
 def order_create(request):
     cart = Cart(request)
+    latest_products = Product.objects.order_by('name')[:3]
+
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
@@ -22,4 +26,11 @@ def order_create(request):
             return render(request, 'created.html', {'order': order})
     else:
         form = OrderCreateForm()
-    return render(request, 'create.html', {'cart': cart, 'form': form})
+
+    context = {
+        'cart': cart,
+        'form': form,
+        'latest_products': latest_products,
+
+    }
+    return render(request, 'create.html', context)

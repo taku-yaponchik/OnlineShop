@@ -53,9 +53,13 @@
 	<p class="buttons center">
 		<button class="btn" type="button">Update</button>
 		<button class="btn" type="button"><a href="{% url 'product-list' %}">Продолжить покупку</a></button>
-		<button class="btn btn-inverse" type="submit" id="checkout">Checkout</button>
+		<button class="btn btn-inverse" type="submit" id="checkout">
+			<a href="{% url 'order_create' %}">
+
+			Оформить заказ
+			</a></button>
 	</p>
 </div>
-{% include 'includes/category_card.html' %}
+
 
 {% endblock %}

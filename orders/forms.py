@@ -1,13 +1,33 @@
 from django import forms
 from .models import Order
 
-class OrderCreateForm(forms.Form):
+
+class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['first_name',
                   'last_name',
                   'email',
                   'address',
-                  'postal_cod',
-                  'city'
-                  ]
+                  'postal_code',
+                  'phone']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': "form-control",
+                                             'id': "first_name",
+                                             'placeholder': 'Имя'}),
+            'last_name': forms.TextInput(attrs={'class': "form-control",
+                                             'id': "last_name",
+                                             'placeholder': 'Фамилия'}),
+            'email': forms.TextInput(attrs={'class': "form-control",
+                                             'id': "email",
+                                             'placeholder': 'example@gmail.com'}),
+            'address': forms.TextInput(attrs={'class': "form-control",
+                                             'id': "address",
+                                             'placeholder': 'г. Бишкек, ул. Манас 7'}),
+            'postal_code': forms.TextInput(attrs={'class': "form-control",
+                                             'id': "postal_code",
+                                             'placeholder': '720017'}),
+            'phone': forms.TextInput(attrs={'class': "form-control",
+                                             'id': "phone",
+                                             'placeholder': '+996 700 123 456'}),
+        }
