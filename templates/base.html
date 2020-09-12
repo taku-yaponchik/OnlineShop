@@ -57,7 +57,15 @@
 						{% endwith %}
 					</li>
 					<li><a href="">Checkout</a></li>
-					<li><a href="{% url 'login' %}">Login</a></li>
+					<li >
+						{% if request.user.is_authenticated %}
+						{{request.user.first_name}} вы желаете <a href="{% url 'logout' %}">Выйти?</a>
+						<a href="{% url 'password_change' %}">Изменить пароль</a>
+						{% else %}
+						<a href="{% url 'login' %}">Войти</a>
+						{% endif %}
+
+					</li>
 				</ul>
 			</div>
 		</div>

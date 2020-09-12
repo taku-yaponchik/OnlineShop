@@ -1,29 +1,51 @@
-{%extends 'base.html'}
+{%extends 'base.html'%}
+{%block title%}
+Регистрация
+{%endblock%}
 
 {%block content%}
-<div class="span5">
-    <h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
-    <form action="#" method="post">
-        <input type="hidden" name="next" value="/">
+<div class="span7">
+    <h4 class="title"><span class="text">Форма регистрации </span></h4>
+    <form action="." method="post" class="form-stacked">
+        {% csrf_token %}
+        {% if user_form.errors %}
+        <p>{{user_form.errors}}</p>
+        {%endif%}
         <fieldset>
             <div class="control-group">
-            <label class="control-label">{{ form.username.label }}</label>
-            <div class="controls">
-              {{ form.username }}
+                <label class="control-label">Логин:</label>
+                <div class="controls">
+                    {{user_form.username}}
+                </div>
             </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">{{ form.password.label }}</label>
-          <div class="controls">
-            {{ form.password }}
-          </div>
-        </div>
-        <div class="control-group">
-            <input tabindex="3" class="btn btn-inverse large" type="submit" value="Войти в аккаун">
+            <div class="control-group">
+                <label class="control-label">Имя:</label>
+                <div class="controls">
+                    {{user_form.first_name}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">E-mail адрес:</label>
+                <div class="controls">
+                    {{user_form.email}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{user_form.password.label}}</label>
+                <div class="controls">
+                    {{user_form.password}}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">{{user_form.password2.label}}</label>
+                <div class="controls">
+                    {{user_form.password2}}
+                </div>
+            </div>
             <hr>
-        </div>
-    </fieldset>
-  </form>
+            <div class="actions"><input tabindex="9" class="btn btn-inverse large" type="submit" value="Регистрация"></div>
+        </fieldset>
+    </form>
 </div>
 
 {%endblock%}
