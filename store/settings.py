@@ -35,9 +35,6 @@ ALLOWED_HOSTS = ['secret-badlands-60391.herokuapp.com', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-
-    'account',
-
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -47,6 +44,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'orders',
+    'account',
 ]
 
 MIDDLEWARE = [
